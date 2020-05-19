@@ -1,0 +1,22 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='src/main.css'>
+<script src='src/main.js'></script>
+<center>
+<video controls>
+<source type='video/mp4' src='src/video/1.mp4'>
+</video>
+<br>
+<a href='src/video/1.mp4' download>Download Movie </a>
+<br><br>
+<a href='#' onclick='ss()'>load latest movie list</a>
+<div id='content2'></div>
+<script src="src/jq.js"></script>
+<script>
+function ss(){
+  $.ajax("index.html", {
+    success: function(response) {
+      $("#content2").html(response);
+    }
+  }); 
+};
+</script>
