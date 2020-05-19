@@ -1,0 +1,24 @@
+video {max-width:90%;min-width:240px;}
+body{background:gray;}
+#filebox{
+margin:10px 3px;
+display:inline-block;
+border:1px black solid;
+}
+#filebox #poster img,#filebox{
+width:150px;
+height:200px;
+}
+#filebox #info{ 
+padding-top:8px;
+position:relative;
+margin-top:-50px;
+height:40px;
+width:150px;
+overflow:auto;
+background-color:black;
+color:orange;
+}
+#filebox a{
+text-decoration:none;
+}
