@@ -14,7 +14,7 @@
     class="video-js"
     controls
     preload="auto"
-    width="250px"
+    width="95%"
 max-height="90%"
     poster=""
     data-setup="{}"
@@ -36,14 +36,11 @@ max-height="90%"
 <script>
 function vchange(){
 vnew = document.getElementById('ulnew').value;
-oldsrc = document.getElementById('vsrc');
-document.getElementById('vold').innerHTML=oldsrc.src;
-oldsrc.src=vnew;
-document.getElementById('vnew').innerHTML=oldsrc.src;
-alert('video url changed to :\n'+oldsrc.src);
-document.getElementById('videop').innerHTML='<video id="my-video"class="video-js"controls preload="auto"width="250px"max-height="90%"poster=""data-setup="{}"><source id="vsrc" src="'+vnew+'" type="video/mp4" /><p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to aweb browser that<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>';
+document.getElementById('videop').innerHTML='&#x3C;video id=&#x22;my-video&#x22;class=&#x22;video-js&#x22; preload=&#x22;auto&#x22; width=&#x22;95%&#x22; max-height=&#x22;90%&#x22; poster=&#x22;&#x22;0data-setup=&#x22;{}&#x22;&#x3E;&#x3C;source src=&#x22;'+vnew+'&#x22; type=&#x22;video/mp4&#x22; /&#x3E;&#x3C;p class=&#x22;vjs-no-js&#x22;&#x3E;To view this video please enable JavaScript, and consider upgrading to aweb browser that&#x3C;a href=&#x22;https://videojs.com/html5-video-support/&#x22; target=&#x22;_blank&#x22;&#x3E;supports HTML5 video&#x3C;/a&#x3E;';
+document.getElementById('vnew').innerHTML=vnew;
+alert('video url changed to :\n'+vnew);
 }
 </script>
-v1.00
-<h6 id='vold' style='color:gray;'></h6>
+v1.0000000
 <h6 id='vnew' style='color:gray;'></h6>
+
