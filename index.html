@@ -12,12 +12,10 @@
   <video
     id="my-video"
     class="video-js"
-    controls
     preload="auto"
     width="300px;
     poster=""
-    data-setup="{}"
-  >
+    data-setup="{}" controls>
     <source id='vsrc' src="56a641e9f2c9ead2873cc2749c7aac25.mp4" type="video/mp4" />
     <p class="vjs-no-js">
       To view this video please enable JavaScript, and consider upgrading to a
@@ -35,7 +33,7 @@
 <script>
 function vchange(){
 vnew = document.getElementById('ulnew').value;
-document.getElementById('videop').innerHTML='<video id="my-video"class="video-js" preload="auto" width="300px" poster="" data-setup="{}"><source src="'+vnew+'" type="video/mp4" /><p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to aweb browser that<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>';         
+document.getElementById('videop').innerHTML='<video id="my-video"class="video-js" preload="auto" width="300px" poster="" data-setup="{}" controls><source src="'+vnew+'" type="video/mp4" /><p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to aweb browser that<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>';         
 document.getElementById('shown').innerHTML=vnew;
 alert('video url changed to :\n'+vnew);
 }
