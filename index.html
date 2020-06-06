@@ -40,11 +40,12 @@ document.getElementById('vold').innerHTML=oldsrc.src;
 oldsrc.src=vnew;
 document.getElementById('vnew').innerHTML=oldsrc.src;
 alert('video url changed to :\n'+oldsrc.src);
+document.getElementById("my-video").load();
 
-
+document.getElementById("my-video").play()
 
 }
 </script>
-v1.0
+v1.00
 <h6 id='vold' style='color:gray;'></h6>
 <h6 id='vnew' style='color:gray;'></h6>
