@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<div id="videop">
   <video
     id="my-video"
     class="video-js"
@@ -27,7 +28,7 @@
       >
     </p>
   </video>
-
+</div>
   <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
 <br><br>
 <input type='url' placeholder='Put Your Video Url ..' id='ulnew'>
@@ -40,12 +41,30 @@ document.getElementById('vold').innerHTML=oldsrc.src;
 oldsrc.src=vnew;
 document.getElementById('vnew').innerHTML=oldsrc.src;
 alert('video url changed to :\n'+oldsrc.src);
-document.getElementById("my-video").load();
+document.getElementById().innnerHTML='
+ <video
+    id="my-video"
+    class="video-js"
+    controls
+    preload="auto"
+    width="250px"
+    height="150px"
+    poster="Screenshot_2020-06-04-09-34-46-889_com.facebook.orca.jpg"
+    data-setup="{}"
+  >
+    <source id="vsrc" src="'+vnew+'" type="video/mp4" />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a>
 
-document.getElementById("my-video").play()
+
+
+';
 
 }
 </script>
-v1.00
+v1.000
 <h6 id='vold' style='color:gray;'></h6>
 <h6 id='vnew' style='color:gray;'></h6>
