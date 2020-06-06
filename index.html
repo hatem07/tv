@@ -35,8 +35,16 @@
 <script>
 function vchange(){
 vnew = document.getElementById('ulnew').value;
-document.getElementById('vsrc').src=vnew;
-alert('video url changed to :\n'+vnew);
+oldsrc = document.getElementById('vsrc');
+document.getElementById('vold').innerHTML=oldsrc.src;
+oldsrc.src=vnew;
+document.getElementById('vnew').innerHTML=oldsrc;
+alert('video url changed to :\n'+oldsrc.src);
+
+
+
 }
 </script>
-v1.1
+v1.2
+<h6 id='vold' style='color:gray;'></h6>
+<h6 id='vnew' style='color:gray;'></h6>
