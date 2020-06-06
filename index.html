@@ -34,8 +34,8 @@
 <input type='submit' value='Play Video' oncllick='vchange()'>
 <script>
 function vchange(){
-vnew = document.getEmlementById('ulnew').value;
-document.getEmlementById('vsrc').value=vnew;
+vnew = document.getElementById('ulnew').value;
+document.getElementById('vsrc').src=vnew;
 alert('video url changed to <br><h6>'+vnew+'</h6>'):
 
 }
