@@ -182,13 +182,42 @@ var lvj=["",//0
     b=lvc[i];
     c="playlist.m3u8";
     d=lvj[i];
+vds=a+b+c;
+ss(vds);
     /*
     <img src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'>
     */
 document.getElementById('logo').innerHTML="<img id='logo'src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'><div id='ttl'>"+nn+"</div>";
 document.title=" القنوات الجزائرية " +nn;
-document.getElementById('out').innerHTML="<iframe allowfullscreen='allowfullscreen'mozallowfullscreen='mozallowfullscreen'msallowfullscreen='msallowfullscreen'oallowfullscreen='oallowfullscreen'webkitallowfullscreen='webkitallowfullscreen'src='"+a+b+c+httpGet()+"'></iframe>";
+document.getElementById('out').innerHTML="<embed allowfullscreen='allowfullscreen'mozallowfullscreen='mozallowfullscreen'msallowfullscreen='msallowfullscreen'oallowfullscreen='oallowfullscreen'webkitallowfullscreen='webkitallowfullscreen'src='"+a+b+c+httpGet()+"'>";
 //alert("your new video is \n "+i);
   };
 
 </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video id="video"></video>
+<script>
+function ss(vds){
+  if(Hls.isSupported()) {
+    var video = document.getElementById('video');
+    var hls = new Hls();
+    hls.loadSource(vds);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+  });
+ }
+ // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+ // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
+ // This is using the built-in support of the plain video element, without using hls.js.
+  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = vds;
+    video.addEventListener('canplay',function() {
+      video.play();
+    });
+  }}
+</script>
+share improve this answer
+
