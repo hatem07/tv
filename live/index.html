@@ -192,9 +192,9 @@ vds=a+b+c+httpGet();
     */
 document.getElementById('logo').innerHTML="<img id='logo'src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'><div id='ttl'>"+nn+"</div>";
 document.title=" القنوات الجزائرية " +nn;
-document.getElementById('out').innerHTML="<video id='video' allowfullscreen='allowfullscreen' mozallowfullscreen='mozallowfullscreen' msallowfullscreen='msallowfullscreen' oallowfullscreen='oallowfullscreen' webkitallowfullscreen='webkitallowfullscreen' controls><source type='application/x-mpegURL' src='"+vds+"'></video>";         
+document.getElementById('out').innerHTML="<iframe id='video' allowfullscreen='allowfullscreen' mozallowfullscreen='mozallowfullscreen' msallowfullscreen='msallowfullscreen' oallowfullscreen='oallowfullscreen' webkitallowfullscreen='webkitallowfullscreen' ><video controls> <source type='application/x-mpegURL' src='"+vds+"'></video></iframe>";         
 //alert("your new video is \n "+i);
-
+/*
   if(Hls.isSupported()) {
     var video = document.getElementById('video');
     var hls = new Hls();
@@ -204,9 +204,10 @@ document.getElementById('out').innerHTML="<video id='video' allowfullscreen='all
       video.play();
   });
  }
+*/
   };
 
 
 </script>
-    v1.7
+    v1.8
 
