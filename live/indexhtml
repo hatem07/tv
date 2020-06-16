@@ -1,0 +1,195 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title >
+    القنوات الجزائرية مباشر
+  </title>
+<style>
+body {
+font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+select option img{
+height:10px;
+width:10px;
+}
+embed{
+height:280px;
+width:90%;
+max-width:720px;
+}
+#logo img{
+width:50px;
+height:50px;
+
+margin-top:-50px;
+}
+#cnl img{
+width:40px;
+height:40px;
+margin:3px;
+}
+</style>
+</head>
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Navbar</span><center><div id='logo'></div>
+<div>
+  قائمة القنوات الجزائرية : 
+<select onchange="lv(this.value, this.options[this.selectedIndex].text)">
+  <option value='0' selected hidden="true">0</option>
+  <option value='1' >Algerie 3</option>
+  <option value='2'>barber tv</option>
+  <option value='3'>Beur tv</option>
+  <option value='4'>Canal Algérie</option>
+  <option value='5'>Dzair tv</option>
+  <option value='6'>Echorouk TV</option>
+  <option value="7">El Djazairia One</option>
+  <option value="8">Ennahar TV</option>
+  <option value="9">ENTV algerie 1</option>
+  <option value="10">Samira TV</option>
+  
+  
+</select>
+</div>
+
+<div>
+  <div id="out">
+  </div>
+  <div id='cnl'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/1_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/2_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/3_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/4_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/5_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/6_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/7_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/8_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/9_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/10_picture.png'>
+  </div>
+  
+</div>
+
+
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#about" onclick='abt()'>About</a>
+  <a href='https://bit.ly/2ULlio7'>Facebook Page</a>
+</div>
+
+
+<script>
+function abt(){
+alert("Welcome all to this app for online Tv Broadcast .\n watch for free (No ads / No Acount / Easy).. \n by : Free2Watch 😎👍");
+}
+var nav=document.getElementById("mySidenav");
+function openNav() {
+nav.style.width = "250px";
+}
+function closeNav() {
+nav.style.width = "0";
+}
+</script>
+
+
+<script>
+//https://token.kube.easybroadcast.fr/authtoken?url=http://apphta.easybroadcast.fr/apphta
+/*
+"http://www.elahmad.com/tv/algeria_live.php?id=el_djazairia",//2
+  "https://playtv.fr/player/embed/canal-algerie/",//3
+  "https://ennahar.dzsecurity.net/embed/player.php",//4
+  ,//"http://www.elahmad.com/tv/algeria_live.php?id=algeria3",//1
+*/
+function httpGet()
+  {
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "https://token.kube.easybroadcast.fr/authtoken?url=http://apphta.easybroadcast.fr/apphta", false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+  }
+var lvc=["http://41.111.166.173:8081/live",//0
+"/A3/",//1
+"",//2
+"/Beur_TV/",//3
+"/CanalAlgerie/",//4
+"/DzairTV_abr/",//5
+"/Echorouk_TV/",//6
+"/EL_DJAZAIRIA_TV/",//7
+"/ennahartv_abr/",//8
+"/ENTV/",//9
+"/SAMIRA_TV/",//10
+/*"//",//1
+"//",//12
+"//",//13
+"//",//14*/
+  ];
+var lvj=["",//0
+"1",//1
+"2",//2
+"3",//3
+"4",//4
+"5",//5
+"6",//6
+"7",//7
+"8",//8
+"9",//9
+"10",//10
+""];
+  function lv(i, nn){
+    
+    a=lvc[0];
+    b=lvc[i];
+    c="playlist.m3u8";
+    d=lvj[i];
+    /*
+    <img src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'>
+    */
+document.getElementById('logo').innerHTML="<img id='logo'src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'><div id='ttl'>"+nn+"</div>";
+document.title=" القنوات الجزائرية " +nn;
+document.getElementById('out').innerHTML="<embed src='"+a+b+c+httpGet()+"'>";
+//alert("your new video is \n "+i);
+  };
+
+</script>
