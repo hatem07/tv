@@ -186,19 +186,19 @@ var lvj=["",//0
     b=lvc[i];
     c="playlist.m3u8";
     d=lvj[i];
-vds=a+b+c;
+vds=a+b+c+httpGet();
     /*
     <img src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'>
     */
 document.getElementById('logo').innerHTML="<img id='logo'src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'><div id='ttl'>"+nn+"</div>";
 document.title=" القنوات الجزائرية " +nn;
-document.getElementById('out').innerHTML="<video id='video' allowfullscreen='allowfullscreen'mozallowfullscreen='mozallowfullscreen'msallowfullscreen='msallowfullscreen'oallowfullscreen='oallowfullscreen'webkitallowfullscreen='webkitallowfullscreen' controls><source type='application/x-mpegURL' src='"+a+b+c+httpGet()+"'></video>";         
+document.getElementById('out').innerHTML="<video id='video' allowfullscreen='allowfullscreen' mozallowfullscreen='mozallowfullscreen' msallowfullscreen='msallowfullscreen' oallowfullscreen='oallowfullscreen' webkitallowfullscreen='webkitallowfullscreen' controls><source type='application/x-mpegURL' src='"+vds+"'></video>";         
 //alert("your new video is \n "+i);
 
   if(Hls.isSupported()) {
     var video = document.getElementById('video');
     var hls = new Hls();
-    hls.loadSource(a+b+c);
+    hls.loadSource(vds);
     hls.attachMedia(video);
     hls.on(Hls.Events.MANIFEST_PARSED,function() {
       video.play();
@@ -208,5 +208,5 @@ document.getElementById('out').innerHTML="<video id='video' allowfullscreen='all
 
 
 </script>
-    v1.5
+    v1.6
 
