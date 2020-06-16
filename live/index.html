@@ -75,7 +75,7 @@ margin:3px;
 <select onchange="lv(this.value, this.options[this.selectedIndex].text)">
   <option value='0' selected hidden="true">0</option>
   <option value='1' >Algerie 3</option>
-  <option value='2'>barber tv</option>
+  <option value='2' hidden=true>barber tv</option>
   <option value='3'>Beur tv</option>
   <option value='4'>Canal Algérie</option>
   <option value='5'>Dzair tv</option>
@@ -94,7 +94,7 @@ margin:3px;
   </div>
   <div id='cnl'>
 <img src='http://hta.backoffice.easybroadcast.fr/channel/1_picture.png'>
-<img src='http://hta.backoffice.easybroadcast.fr/channel/2_picture.png'>
+<img src='http://hta.backoffice.easybroadcast.fr/channel/2_picture.png' hidden=true>
 <img src='http://hta.backoffice.easybroadcast.fr/channel/3_picture.png'>
 <img src='http://hta.backoffice.easybroadcast.fr/channel/4_picture.png'>
 <img src='http://hta.backoffice.easybroadcast.fr/channel/5_picture.png'>
@@ -188,7 +188,7 @@ var lvj=["",//0
     */
 document.getElementById('logo').innerHTML="<img id='logo'src='http://hta.backoffice.easybroadcast.fr/channel/"+d+"_picture.png'><div id='ttl'>"+nn+"</div>";
 document.title=" القنوات الجزائرية " +nn;
-document.getElementById('out').innerHTML="<embed src='"+a+b+c+httpGet()+"'>";
+document.getElementById('out').innerHTML="<iframe allowfullscreen='allowfullscreen'mozallowfullscreen='mozallowfullscreen'msallowfullscreen='msallowfullscreen'oallowfullscreen='oallowfullscreen'webkitallowfullscreen='webkitallowfullscreen'src='"+a+b+c+httpGet()+"'></iframe>";
 //alert("your new video is \n "+i);
   };
 
