@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 540px;
+    padding: 20px;
+    height: 80%; /* Container takes 80% of the parent width */
+    margin: 0 auto; /* Center the container */
+
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+
+
+.channel-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.channel-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.channel-list li:hover {
+    background-color: gray;
+}
+
+.video-player {
+	animation: colorChange 180s infinite;
+	    width: 100%;
+}
+
+ @keyframes colorChange {
+            0% {
+                box-shadow: 0px 0px 150px red;
+            }
+            25% {
+                box-shadow: 0px 0px 150px blue;
+            }
+            50% {
+                box-shadow: 0px 0px 150px green;
+            }
+            75% {
+                box-shadow: 0px 0px 150px yellow;
+            }
+            100% {
+                box-shadow: 0px 0px 150px red;
+            }
+        }
+		
+video {
+
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .channel-list li {
+        padding: 15px; /* Larger tap targets for mobile */
+    }
+
+    video {
+        height: 200px; /* Adjust video height for mobile */
+    }
+}
+
+
+#channel-list {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+
+    color: #fff; /* Ensure list items are visible in dark mode */
+}
+
+
+.channel-list {
+
+    padding: 10px;
+    border-radius: 5px;
+	border-color: #555; /* Dark border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow-y: auto; /* Enables vertical scrolling */
+	max-height: 20%; /* Adjust video height for mobile */
+    background-color: #333; /* Dark background */
+    color: #fff; /* Dark text */
+  
+}
+
+
+/* Dark Mode Scrollbar (WebKit) */
+.channel-list::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.channel-list::-webkit-scrollbar-track {
+    background: #444; /* Dark track color */
+}
+
+.channel-list::-webkit-scrollbar-thumb {
+    background: #666; /* Dark thumb color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.channel-list::-webkit-scrollbar-thumb:hover {
+    background: #888; /* Lighter thumb color on hover */
+}
+
+/* Dark Mode Scrollbar (Firefox) */
+.channel-list {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: #666 #444; /* thumb and track color */
+}
