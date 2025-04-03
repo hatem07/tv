@@ -1,0 +1,26 @@
+#EXTM3U url-tvg="https://raw.githubusercontent.com/iptv-org/epg/master/sites/elcinema.com/elcinema.com_ar.channels.xml"
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="mbc3", mbc3-140p
+https://shls-mbc3-prod-dub.shahid.net/out/v1/d5bbe570e1514d3d9a142657d33d85e6/index_8.m3u8
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="mbc3", mbc3-240p
+https://shls-mbc3-prod-dub.shahid.net/out/v1/d5bbe570e1514d3d9a142657d33d85e6/index_10.m3u8
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="mbc3", mbc3-360p
+https://shls-mbc3-prod-dub.shahid.net/out/v1/d5bbe570e1514d3d9a142657d33d85e6/index_5.m3u8
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="Spacetoon", Spacetoon 240p
+https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/chunklist_w810512056_b346000_slAR.m3u8
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="Spacetoon", Spacetoon 360p
+https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/chunklist_w810512056_b596000_slAR.m3u8
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="Spacetoon", Spacetoon 480p
+https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/chunklist_w810512056_b946000_slAR.m3u8
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="Spacetoon", Spacetoon auto
+https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/playlist.m3u8
+
+
+#EXTINF:-1 tvg-id="" tvg-logo="" group-title="C N", Cartoon Network auto
+https://uselector.cdn.intigral-ott.net/CNA/CNA.isml/manifest.mpd
