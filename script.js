@@ -31,20 +31,63 @@ channels.forEach((channel) => {
 
 // Function to play the selected channel
 function playChannel(url) {
-    if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(videoPlayer);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            videoPlayer.play();
-        });
-    } else if (videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
-        // For Safari and other browsers that support native HLS
-        videoPlayer.src = url;
-        videoPlayer.play();
-    } else {
-        alert("Your browser does not support HLS streaming.");
+    const maxRetries = 3; // Maximum number of retries
+    let retryCount = 0;
+
+    function attemptPlay() {
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(videoPlayer);
+
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                videoPlayer.play().catch(e => {
+                    console.error("Error attempting to play:", e);
+                    handleError();
+                });
+            });
+
+            hls.on(Hls.Events.ERROR, (event, data) => {
+                if (data.fatal) {
+                    switch (data.type) {
+                        case Hls.ErrorTypes.NETWORK_ERROR:
+                            console.error("Fatal network error encountered, trying to recover");
+                            hls.startLoad();
+                            break;
+                        case Hls.ErrorTypes.MEDIA_ERROR:
+                            console.error("Fatal media error encountered, trying to recover");
+                            hls.recoverMediaError();
+                            break;
+                        default:
+                            console.error("Fatal error encountered, cannot recover");
+                            handleError();
+                            break;
+                    }
+                }
+            });
+        } else if (videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
+            // For Safari and other browsers that support native HLS
+            videoPlayer.src = url;
+            videoPlayer.play().catch(e => {
+                console.error("Error attempting to play:", e);
+                handleError();
+            });
+        } else {
+            alert("Your browser does not support HLS streaming.");
+        }
     }
+
+    function handleError() {
+        retryCount++;
+        if (retryCount < maxRetries) {
+            console.log(`Retrying... Attempt ${retryCount}`);
+            attemptPlay();
+        } else {
+            alert("Failed to load the stream after several attempts. Please check your connection or try again later.");
+        }
+    }
+
+    attemptPlay();
 }
 
 // Enable fullscreen mode on mobile devices
