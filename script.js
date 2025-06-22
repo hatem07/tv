@@ -31,7 +31,7 @@ channels.forEach((channel) => {
 
 // Function to play the selected channel
 function playChannel(url) {
-    const maxRetries = 3; // Maximum number of retries
+    const maxRetries = 999; // Maximum number of retries
     let retryCount = 0;
 
     function attemptPlay() {
