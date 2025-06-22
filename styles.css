@@ -58,7 +58,7 @@ h1 {
             }
         }
 		
-video {
+video ,embed{
 
     width: 100%;
     height: auto;
@@ -80,7 +80,7 @@ video {
         padding: 15px; /* Larger tap targets for mobile */
     }
 
-    video {
+    video ,embed{
         height: 200px; /* Adjust video height for mobile */
     }
 }
