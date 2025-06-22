@@ -7,7 +7,8 @@ const channels = [
     { name: "Spacetoon 360p", url: "https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/chunklist_w810512056_b596000_slAR.m3u8" },
     { name: "Spacetoon 480p", url: "https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/chunklist_w810512056_b946000_slAR.m3u8" },
     { name: "Spacetoon auto", url: "https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/playlist.m3u8" },
-    { name: "Cn AR auto", url: "https://watch.3rbcafee.com/2024/10/cnarabia.html", isWebpage: true }
+    { name: "Cn AR auto", url: "https://watch.3rbcafee.com/2024/10/cnarabia.html", isWebpage: true },
+    { name: "قنوات اخرى", url: "https://www.3rbcafee.com/", isWebpage: true }
 ];
 
 const channelList = document.getElementById("channel-list");
