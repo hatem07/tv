@@ -7,20 +7,20 @@ const channels = [
     { name: "Spacetoon 360p", url: "https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/chunklist_w810512056_b596000_slAR.m3u8" },
     { name: "Spacetoon 480p", url: "https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/chunklist_w810512056_b946000_slAR.m3u8" },
     { name: "Spacetoon auto", url: "https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/playlist.m3u8" },
-    { name: "Cn AR auto", url: "https://watch.3rbcafee.com/2024/10/cnarabia.html" }
+    { name: "Cn AR auto", url: "https://watch.3rbcafee.com/2024/10/cnarabia.html", isWebpage: true }
 ];
 
 const channelList = document.getElementById("channel-list");
 const videoPlayer = document.getElementById("video-player");
-const embedContainer = document.getElementById("embed-container"); // Make sure you have this element in your HTML
 
 // Dynamically add channels to the list
 channels.forEach((channel) => {
     const li = document.createElement("li");
     li.textContent = channel.name;
     li.addEventListener("click", () => {
-        if (channel.name === "Cn AR auto") {
-            playEmbed(channel.url);
+        if (channel.isWebpage) {
+            // Open URL directly in new tab for webpages
+            window.open(channel.url, '_blank');
         } else {
             playChannel(channel.url);
         }
@@ -30,16 +30,6 @@ channels.forEach((channel) => {
 
 // Function to play the selected channel
 function playChannel(url) {
-    // Show video player and hide embed
-    videoPlayer.style.display = "block";
-    embedContainer.style.display = "none";
-    
-    // Clear embed src if it exists
-    const iframe = embedContainer.querySelector("iframe");
-    if (iframe) {
-        iframe.src = "";
-    }
-
     if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(url);
@@ -54,29 +44,6 @@ function playChannel(url) {
     } else {
         alert("Your browser does not support HLS streaming.");
     }
-}
-
-// Function to play embed
-function playEmbed(url) {
-    // Hide video player and show embed
-    videoPlayer.style.display = "none";
-    embedContainer.style.display = "block";
-    
-    // Clear any existing HLS instance
-    if (videoPlayer.hls) {
-        videoPlayer.hls.destroy();
-    }
-    videoPlayer.src = "";
-    
-    // Create or update embed iframe
-    let iframe = embedContainer.querySelector("iframe");
-    if (!iframe) {
-        iframe = document.createElement("iframe");
-        iframe.setAttribute("allowfullscreen", "true");
-        embedContainer.innerHTML = "";
-        embedContainer.appendChild(iframe);
-    }
-    iframe.src = url;
 }
 
 // Enable fullscreen mode on mobile devices
