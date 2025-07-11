@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مشغل القرآن الكريم</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 10px 0 5px;
+      color: #ffa726;
+      text-shadow: 0 0 5px #ffa726;
+      text-align: center;
+    }
+
+    /* === Sidebar === */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -270px;
+      width: 250px;
+      height: 100%;
+      background: #2b2b2b;
+      box-shadow: -2px 0 5px rgba(0, 229, 255, 0.2);
+      overflow-y: auto;
+      transition: right 0.3s ease;
+      z-index: 999;
+      padding: 10px;
+    }
+
+    .sidebar.open {
+      right: 0;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin: 10px 0;
+      color: #ffa726;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      padding: 8px 12px;
+      margin: 4px 0;
+      border-radius: 6px;
+      background: #1e1e1e;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 15px;
+      box-shadow: 0 0 2px #00e5ff inset;
+    }
+
+    .sidebar li:hover {
+      background: #333;
+    }
+
+    .menu-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px;
+      font-size: 18px;
+      background: #121212;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #ffa726, inset 0 0 5px #ffa726;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .visualizer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      margin-top: 50px;
+      height: 40px;
+    }
+
+    .bar {
+      width: 6px;
+      height: 20px;
+      background: #00e5ff;
+      animation: pulse 1s infinite ease-in-out;
+      border-radius: 3px;
+      box-shadow: 0 0 5px #00e5ff;
+    }
+
+    .bar:nth-child(1) { animation-delay: 0s; }
+    .bar:nth-child(2) { animation-delay: 0.2s; }
+    .bar:nth-child(3) { animation-delay: 0.4s; }
+    .bar:nth-child(4) { animation-delay: 0.6s; }
+    .bar:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes pulse {
+      0%, 100% { height: 20px; }
+      50% { height: 40px; }
+    }
+
+    #controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #121212;
+      color: #fff;
+      text-shadow: 0 0 3px rgba(255,255,255,0.4);
+      transition: 0.3s ease;
+      box-shadow: 0 0 5px #00e5ff, inset 0 0 5px #00e5ff;
+    }
+
+    button#toggleBtn {
+      box-shadow: 0 0 5px #ffa726, inset 0 0 5px #ffa726;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      filter: brightness(1.15);
+    }
+
+    #surahLabel {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #f1f1f1;
+      text-align: center;
+    }
+
+    #progressContainer {
+      width: 90%;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 10px;
+      -webkit-appearance: none;
+      background: #222;
+      border-radius: 5px;
+      outline: none;
+      box-shadow: 0 0 5px #00e5ff, inset 0 0 5px #00e5ff;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 0 0 10px #00e5ff;
+      cursor: pointer;
+      margin-top: -4px;
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 0 0 10px #00e5ff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 500px) {
+      button {
+        flex: 1 1 100px;
+        font-size: 16px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar toggle -->
+  <button class="menu-button" onclick="toggleSidebar()">📜</button>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h3>قائمة السور</h3>
+    <ul id="surahList"></ul>
+  </div>
+
+  <!-- Visuals & Player -->
+  <h1>🔊 مشغل القرآن الكريم</h1>
+  <div class="visualizer">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+
+  <div id="controls">
+    <button id="prevBtn">⏮️ السابق</button>
+    <button id="toggleBtn">▶️ تشغيل</button>
+    <button id="nextBtn">التالي ⏭️</button>
+  </div>
+
+  <div id="surahLabel">الفاتحة 1</div>
+
+  <div id="progressContainer">
+    <input type="range" id="progress" value="0" min="0" max="100">
+  </div>
+
+  <audio id="quranAudio" preload="auto"></audio>
+
+  <script>
+    const surahNames = [
+      "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
+      "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
+      "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم",
+      "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+      "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق",
+      "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة",
+      "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج",
+      "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس",
+      "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد",
+      "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات",
+      "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
+      "المسد", "الإخلاص", "الفلق", "الناس"
+    ];
+
+    const reciterUrl = "https://server7.mp3quran.net/s_gmd";
+    let currentSurah = 1;
+    let isPlaying = false;
+
+    const audio = document.getElementById("quranAudio");
+    const toggleBtn = document.getElementById("toggleBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const surahLabel = document.getElementById("surahLabel");
+    const progress = document.getElementById("progress");
+
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("open");
+    }
+
+    function getSurahUrl(num) {
+      return `${reciterUrl}/${String(num).padStart(3, '0')}.mp3`;
+    }
+
+    function updateLabel() {
+      surahLabel.textContent = `${surahNames[currentSurah - 1]} ${currentSurah}`;
+    }
+
+    function playSurah() {
+      audio.src = getSurahUrl(currentSurah);
+      updateLabel();
+      audio.play();
+    }
+
+    function loadAndMaybePlay() {
+      audio.src = getSurahUrl(currentSurah);
+      updateLabel();
+      if (isPlaying) audio.play();
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      isPlaying = !isPlaying;
+      toggleBtn.textContent = isPlaying ? "⏸️ إيقاف" : "▶️ تشغيل";
+      isPlaying ? playSurah() : audio.pause();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentSurah = (currentSurah % 114) + 1;
+      loadAndMaybePlay();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentSurah = (currentSurah - 2 + 114) % 114 + 1;
+      loadAndMaybePlay();
+    });
+
+    audio.addEventListener("ended", () => {
+      currentSurah = (currentSurah % 114) + 1;
+      playSurah();
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) {
+        progress.value = (audio.currentTime / audio.duration) * 100;
+      }
+    });
+
+    progress.addEventListener("input", () => {
+      if (audio.duration) {
+        audio.currentTime = (progress.value / 100) * audio.duration;
+      }
+    });
+
+    // Fill sidebar list
+    const surahList = document.getElementById("surahList");
+    surahNames.forEach((name, i) => {
+      const li = document.createElement("li");
+      li.textContent = `${name} ${i + 1}`;
+      li.onclick = () => {
+        currentSurah = i + 1;
+        isPlaying = true;
+        toggleBtn.textContent = "⏸️ إيقاف";
+        playSurah();
+        toggleSidebar();
+      };
+      surahList.appendChild(li);
+    });
+  </script>
+
+</body>
+</html>
