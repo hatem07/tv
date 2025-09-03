@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Safe Text Compression</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea { width: 100%; height: 120px; margin: 10px 0; }
+    button { margin: 5px; padding: 8px 15px; font-size: 14px; }
+    .counter { font-size: 13px; color: #555; margin-left: 5px; }
+    #ratio { font-weight: bold; color: darkblue; margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Text Compression Tool (Facebook Safe)</h2>
+
+  <label>Input Text: <span id="inputCount" class="counter">0 chars</span></label>
+  <textarea id="input" oninput="updateCounts()"></textarea>
+
+  <div>
+    <button onclick="doCompress()">Compress</button>
+    <button onclick="doDecompress()">Decompress</button>
+    <button onclick="copyOutput()">Copy Output</button>
+  </div>
+
+  <label>Output: <span id="outputCount" class="counter">0 chars</span></label>
+  <span id="ratio"></span>
+  <textarea id="output" oninput="updateCounts()"></textarea>
+
+  <script>
+    function doCompress() {
+      const input = document.getElementById("input").value;
+      const compressed = LZString.compressToEncodedURIComponent(input);
+      document.getElementById("output").value = compressed;
+      updateCounts();
+    }
+
+    function doDecompress() {
+      const compressed = document.getElementById("output").value;
+      const decompressed = LZString.decompressFromEncodedURIComponent(compressed);
+      if (decompressed === null) {
+        alert("Invalid compressed text!");
+      } else {
+        document.getElementById("input").value = decompressed;
+      }
+      updateCounts();
+    }
+
+    function copyOutput() {
+      const output = document.getElementById("output");
+      output.select();
+      output.setSelectionRange(0, 999999); // for mobile
+      document.execCommand("copy");
+      alert("Output copied to clipboard!");
+    }
+
+    function updateCounts() {
+      const input = document.getElementById("input").value;
+      const output = document.getElementById("output").value;
+
+      document.getElementById("inputCount").textContent = input.length + " chars";
+      document.getElementById("outputCount").textContent = output.length + " chars";
+
+      if (input.length > 0 && output.length > 0) {
+        const ratio = ((output.length / input.length) * 100).toFixed(1);
+        document.getElementById("ratio").textContent = "Compression: " + ratio + "% of original";
+      } else {
+        document.getElementById("ratio").textContent = "";
+      }
+    }
+  </script>
+</body>
+</html>
